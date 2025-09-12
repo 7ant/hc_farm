@@ -1,4 +1,4 @@
-print('12345')
+print('starting')
 local Type = _G.Type
 local MainUser = _G.MainUser
 local AltUser = _G.AltUser
@@ -69,7 +69,7 @@ while task.wait() do
     task.spawn(function()
 		if Fighting == false then
         	if Player2.Value == Player and Player1.Value == Alt and Player3.Value == nil and Player4.Value == nil then
-            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player.Value ~= nil or Player4.Value ~= nil
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player1.Value ~= nil or Player4.Value ~= nil
 				if Player2.Value == nil or Player3.Value ~= nil or Player4.Value ~= nil then
 					return
 				end
@@ -128,7 +128,7 @@ while task.wait() do
 		if Fighting == false then
         	if Player1.Value == Player and Player2.Value == Alt and Player3.Value == nil and Player4.Value == nil then
             	--print('abc')
-            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player.Value ~= nil or Player4.Value ~= nil
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player1.Value ~= nil or Player4.Value ~= nil
 				if Player2.Value == nil or Player3.Value ~= nil or Player4.Value ~= nil then
 					return
 				end
