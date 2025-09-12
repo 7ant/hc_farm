@@ -1,0 +1,145 @@
+if Type == 1 then
+local Player = game:GetService('Players').LocalPlayer
+local Alt = game:GetService('Players'):FindFirstChild(AltUser)
+
+local InBoxFolder = workspace.Players.InBox
+local Pad1 = workspace.Ignored.Boxes.FightPlace.JoinFight1
+local Pad2 = workspace.Ignored.Boxes.FightPlace.JoinFight2
+local Player1 = Pad1.Parent.Player1
+local Player2 = Pad2.Parent.Player2
+local Player3 = Pad1.Parent.Player3
+local Player4 = Pad2.Parent.Player4
+local Gun = '[SMG]'
+
+local function ForceHit()
+    local Target = Alt.Character.SpecialParts.Head
+    local args = {  
+        [1] = "Shoot",
+            [2] = {
+                    [1] = {
+                        [1] = {
+                            Normal = Target.Position,
+                            Instance = Target,
+                            Position = Target.Position
+                        }
+                    },
+                    [2] = {
+                    [1] = {
+                        thePart = Target,
+                        theOffset = Vector3.new(0,0,0)
+                    }
+                },
+            [3] = Player.Character.HumanoidRootPart.Position,
+            [4] = Player.Character.HumanoidRootPart.Position,
+            [5] = tick()
+        }
+    }
+                    
+	game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+end
+
+local Fighting = false
+_G.Enabled = true
+
+local function Start()
+    task.spawn(function()
+		Player.Backpack:FindFirstChild(Gun).Parent = Player.Character
+		repeat task.wait() ForceHit() until InBoxFolder:FindFirstChild(Player.Name) == nil
+        return
+    end)
+end
+
+local function TP(Type)
+    if Type ~= nil then
+        local SafeCFrame = CFrame.new(-8.74397945, 11.7078075, -24.0244522, 0.95516628, -9.4857505e-08, 0.296069801, 1.14726468e-07, 1, -4.97360944e-08, -0.296069801, 8.14732815e-08, 0.95516628)
+        Player.Character.HumanoidRootPart.CFrame = SafeCFrame
+    else
+        local Tp1 = Pad2.Region
+        Player.Character.HumanoidRootPart.CFrame = Tp1.CFrame
+    end
+end
+
+while task.wait() do
+    if _G.Enabled == false then return end
+    task.spawn(function()
+		if Fighting == false then
+        	if Player2.Value == Player and Player1.Value == Alt and Player3.Value == nil and Player4.Value == nil then
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player.Value ~= nil or Player4.Value ~= nil
+				if Player2.Value == nil or Player3.Value ~= nil or Player4.Value ~= nil then
+					return
+				end
+            	task.wait()
+            	Start()
+            	Fighting = true
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) == nil
+            	task.wait(1)
+            	Fighting = false
+        	elseif Player1.Value == nil or Player2.Value == nil then
+            	TP()
+        	elseif (Player1.Value ~= nil and Player1.Value ~= Alt) or Player3.Value ~= nil or Player4.Value ~= nil then
+        	    TP('Safe')
+        	end
+    	end
+		return
+	end)
+end
+elseif Type == 2 then 
+local Player = game:GetService('Players').LocalPlayer
+local Alt = game:GetService('Players'):FindFirstChild(MainUser)
+
+local InBoxFolder = workspace.Players.InBox
+local Pad1 = workspace.Ignored.Boxes.FightPlace.JoinFight1
+local Pad2 = workspace.Ignored.Boxes.FightPlace.JoinFight2
+local Player1 = Pad1.Parent.Player1
+local Player2 = Pad2.Parent.Player2
+local Player3 = Pad1.Parent.Player3
+local Player4 = Pad2.Parent.Player4
+
+local Fighting = false  
+_G.Enabled = true
+
+local function Start()
+    task.spawn(function()
+        repeat task.wait() until Player.Character:FindFirstChild('ForceField')
+        task.wait(.1)
+        Player.Character.Humanoid.Health = 0
+        return
+    end)
+end
+
+local function TP(Type)
+    if Type ~= nil then
+        local SafeCFrame = CFrame.new(-8.74397945, 11.7078075, -24.0244522, 0.95516628, -9.4857505e-08, 0.296069801, 1.14726468e-07, 1, -4.97360944e-08, -0.296069801, 8.14732815e-08, 0.95516628)
+        Player.Character.HumanoidRootPart.CFrame = SafeCFrame
+    else
+        local Tp1 = Pad1.Region
+        Player.Character.HumanoidRootPart.CFrame = Tp1.CFrame
+    end
+end
+
+while task.wait() do
+    if _G.Enabled == false then return end
+    task.spawn(function()
+		if Fighting == false then
+        	if Player1.Value == Player and Player2.Value == Alt and Player3.Value == nil and Player4.Value == nil then
+            	--print('abc')
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) or Player2.Value == nil or Player.Value ~= nil or Player4.Value ~= nil
+				if Player2.Value == nil or Player3.Value ~= nil or Player4.Value ~= nil then
+					return
+				end
+            	task.wait()
+            	Start()
+            	Fighting = true
+            	repeat task.wait() until InBoxFolder:FindFirstChild(Player.Name) == nil
+            	task.wait(1)
+            	Fighting = false
+        	elseif Player1.Value == nil or Player2.Value == nil then
+            	TP()
+        	elseif (Player2.Value ~= nil and Player2.Value ~= Alt) or Player3.Value ~= nil or Player4.Value ~= nil then
+        	    TP('Safe')
+        	end
+    	end
+		return
+	end)
+end
+end
